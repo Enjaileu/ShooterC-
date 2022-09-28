@@ -15,6 +15,7 @@
     <ClCompile Include="EtatMenu.cpp" />
     <ClCompile Include="GestionTextures.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Vaisseau.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Etat.h" />
@@ -25,5 +26,6 @@
     <ClInclude Include="EtatMenu.h" />
     <ClInclude Include="GestionTextures.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Vaisseau.h" />
   </ItemGroup>
 </Project>

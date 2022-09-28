@@ -1,6 +1,6 @@
 #pragma once
 #include "Etat.h"
-#include "Constants.h"
+#include "Vaisseau.h"
 
 class EtatJeu :
     public Etat
@@ -15,6 +15,8 @@ private:
 
     ProchainEtat prochainEtat() override;
     ProchainEtat transition{ ProchainEtat::None };
+
+    Vaisseau vaisseau{ 100.f, 100.f, 0 };
 };
 
 

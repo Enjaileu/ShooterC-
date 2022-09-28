@@ -9,19 +9,12 @@ public:
 	//UI
 	static const int VERTICAL_SEPARATION;
 
-	// Serpent
-	static const int SEGMENT_TAILLE;
-	static const float HORLOGE;
-	static const float SERPENT_DEPART_X;
-	static const float SERPENT_DEPART_Y;
-
-	// Carte
-	static const int CARTE_TAILLE_X;
-	static const int CARTE_TAILLE_Y;
-	static float CoordX(int xCarte);
-	static float CoordY(int yCarte);
-
-	static int CarteX(float x);
-	static int CarteY(float y);
+	//VAISSEAU
+	static const int START_X;
+	static const int START_Y;
+	static const float ACCELERATION;
+	static const float DECELERATION;
+	static const float Constants::MAX_VY;
+	static const float Constants::MAX_VX;
 };
 

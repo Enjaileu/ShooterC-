@@ -6,5 +6,9 @@ class Vaisseau :
 public:
     Vaisseau(float xP, float yP, float rotationP);
     void Update(float dt);
+
+private:
+    float vx;
+    float vy;
 };
 

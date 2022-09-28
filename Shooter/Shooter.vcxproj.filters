@@ -9,5 +9,21 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EtatGameover.cpp" />
+    <ClCompile Include="EtatJeu.cpp" />
+    <ClCompile Include="Constants.cpp" />
+    <ClCompile Include="EtatMenu.cpp" />
+    <ClCompile Include="GestionTextures.cpp" />
+    <ClCompile Include="Sprite.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Etat.h" />
+    <ClInclude Include="ProchainEtat.h" />
+    <ClInclude Include="EtatGameover.h" />
+    <ClInclude Include="EtatJeu.h" />
+    <ClInclude Include="Constants.h" />
+    <ClInclude Include="EtatMenu.h" />
+    <ClInclude Include="GestionTextures.h" />
+    <ClInclude Include="Sprite.h" />
   </ItemGroup>
 </Project>

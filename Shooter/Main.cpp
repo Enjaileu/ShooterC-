@@ -1,73 +1,94 @@
 #include "raylib.h"
-#include <iostream>
-#include <stdio.h>  
-#include <math.h> 
-#include <vector>
-#include <string>
+#include "Constants.h"
+#include "GestionTextures.h"
+#include "EtatJeu.h"
+#include "EtatMenu.h"
+#include "EtatGameover.h"
 
+//declaration
+//------------------------------------------------------------------
 
-using namespace std;
-
-//Editor Variable
-void Update();
+void Load();
 void Draw();
-void DrawUi();
-void Start();
+void Update();
+void Unload();
+void GererChangementEtat();
+void ChangerEtat(Etat* nouvelEtat);
 
-//Setup la taille de l'écran
-int const screenWidth = 960;
-int const screenHeight = 540;
+EtatMenu etatMenu{};
+EtatJeu etatJeu{};
+EtatGameover etatGameover{};
+Etat* etatCourant = &etatJeu;
 
-int main(int argc, char* argv[])
-{
+vector<string> nomsTextures{
 
-    //Créer un écran et on met les fps à 60
-    string windowName = "GameWindow";
-    InitWindow(screenWidth, screenHeight, windowName.c_str());
+};
+GestionTexture gestionTexture{ nomsTextures };
 
-    //ToggleFullscreen();
-    SetWindowPosition(0, 10);
-    SetTargetFPS(60);
+//Code et définition
+//------------------------------------------------------------------
 
-    Start();
+void Load() {
+	InitWindow(Constants::SCREEN_WIDTH, Constants::SCREEN_HEIGHT, "Shooter");
+	SetTargetFPS(60);
 
-    while (!WindowShouldClose())    // Detect window close button or ESC key
-    {
-        // Update
-        Update();
-        // Draw
-        Draw();       
-
-    }
-
-    CloseWindow();
-
-    return 0;
-
-
+	gestionTexture.Load();
+	etatCourant->Load();
 }
 
-void Start()
-{
+void Draw() {
 
+	BeginDrawing();
+	ClearBackground(BLACK);
+	etatCourant->Draw();
+
+	EndDrawing();
+}
+void Update() {
+	float dt = GetFrameTime();
+	etatCourant->Update(dt);
+	GererChangementEtat();
 }
 
-void Update()
-{
+void Unload() {
+	gestionTexture.Unload();
+	etatCourant->Unload();
 
+	CloseWindow();
 }
 
-void Draw()
-{
-    BeginDrawing();
-    ClearBackground(BLACK);
-
-
-    DrawUi();
-    EndDrawing();
+void GererChangementEtat() {
+	ProchainEtat prochainEtat = etatCourant->prochainEtat();
+	switch (prochainEtat)
+	{
+	case ProchainEtat::Menu:
+		ChangerEtat(&etatMenu);
+		break;
+	case ProchainEtat::Jeu:
+		ChangerEtat(&etatJeu);
+		break;
+	case ProchainEtat::Gameover:
+		ChangerEtat(&etatGameover);
+		break;
+	default:
+		break;
+	}
 }
 
-void DrawUi()
-{
+void ChangerEtat(Etat* nouvelEtat) {
+	etatCourant->Unload();
+	etatCourant = nouvelEtat;
+	etatCourant->Load();
+}
 
+int main() {
+	Load();
+
+	while (!WindowShouldClose()) {
+		Update();
+		Draw();
+	}
+
+	Unload();
+	return 0;
 }

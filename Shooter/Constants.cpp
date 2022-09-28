@@ -2,7 +2,7 @@
 #include <cmath>
 
 //SCREEN
-const int Constants::SCREEN_WIDTH{ 900 };
+const int Constants::SCREEN_WIDTH{ 800 };
 const int Constants::SCREEN_HEIGHT{ 600 };
 
 //UI

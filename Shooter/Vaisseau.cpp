@@ -8,6 +8,12 @@ Vaisseau::Vaisseau(float xP, float yP, float rotationP) :
 {
 }
 
+void Vaisseau::Load() {
+	Sprite::Load();
+	width = GetRectangle().width;
+	height = GetRectangle().height;
+}
+
 void Vaisseau::Update(float dt)
 {
 	if (IsKeyDown(KEY_UP)) {
@@ -36,4 +42,17 @@ void Vaisseau::Update(float dt)
 
 	x += vx;
 	y += vy;
+
+	if (x <= width/2) {
+		x = width / 2;
+	}
+	else if (x >= Constants::SCREEN_WIDTH - width / 2) {
+		x = Constants::SCREEN_WIDTH - width / 2;
+	}
+	else if (y <= height / 2) {
+		y = height / 2;
+	}
+	else if (y > Constants::SCREEN_HEIGHT - height / 2) {
+		y = Constants::SCREEN_HEIGHT - height / 2;
+	}
 }

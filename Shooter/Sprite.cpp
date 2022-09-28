@@ -27,7 +27,7 @@ void Sprite::Draw() {
 }
 
 void Sprite::Unload() {
-	UnloadTexture(texture);
+	//UnloadTexture(texture);
 }
 
 Rectangle Sprite::GetRectangle() {

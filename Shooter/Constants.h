@@ -16,5 +16,8 @@ public:
 	static const float DECELERATION;
 	static const float Constants::MAX_VY;
 	static const float Constants::MAX_VX;
+
+	//TIR
+	static const float TIR_VITESSE;
 };
 

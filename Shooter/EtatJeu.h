@@ -2,6 +2,9 @@
 #include "Etat.h"
 #include "Vaisseau.h"
 #include "Constants.h"
+#include "Tir.h"
+#include <vector>
+using std::vector;
 
 class EtatJeu :
     public Etat
@@ -18,6 +21,8 @@ private:
     ProchainEtat transition{ ProchainEtat::None };
 
     Vaisseau vaisseau{ Constants::START_X, Constants::START_Y, 0 };
+
+    vector<Tir*> tirs{};
 };
 
 

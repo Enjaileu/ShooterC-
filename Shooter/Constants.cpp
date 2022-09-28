@@ -15,3 +15,6 @@ const float Constants::ACCELERATION{ 250.f };
 const float Constants::DECELERATION{ 0.58f };
 const float Constants::MAX_VY{ 25.0f };
 const float Constants::MAX_VX{ 15.0f };
+
+//TIR
+const float Constants::TIR_VITESSE{ 1000.f };

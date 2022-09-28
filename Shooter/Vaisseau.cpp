@@ -14,6 +14,14 @@ void Vaisseau::Load() {
 	height = GetRectangle().height;
 }
 
+Tir* Vaisseau::Tirer()
+{
+	Tir* tir = new Tir(x + width, y);
+	//Tir tir{ x + width, y };
+	tir->Load();
+	return tir;
+}
+
 void Vaisseau::Update(float dt)
 {
 	if (IsKeyDown(KEY_UP)) {

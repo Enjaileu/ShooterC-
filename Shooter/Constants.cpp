@@ -18,3 +18,9 @@ const float Constants::MAX_VX{ 15.0f };
 
 //TIR
 const float Constants::TIR_VITESSE{ 1000.f };
+
+//ENNEMI
+const float Constants::ENNEMI_VITESSE_X{ -10.f };
+const float Constants::ENNEMI_VITESSE_Y{ 6.f };
+const float Constants::ENNEMI_MAX_VX{ -5.f };
+const float Constants::ENNEMI_MAX_VY{ 6.f };

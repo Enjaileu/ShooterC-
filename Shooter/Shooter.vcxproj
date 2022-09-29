@@ -171,6 +171,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Constants.cpp" />
+    <ClCompile Include="Ennemi.cpp" />
     <ClCompile Include="EtatGameover.cpp" />
     <ClCompile Include="EtatJeu.cpp" />
     <ClCompile Include="EtatMenu.cpp" />
@@ -187,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="Ennemi.h" />
     <ClInclude Include="Etat.h" />
     <ClInclude Include="EtatGameover.h" />
     <ClInclude Include="EtatJeu.h" />

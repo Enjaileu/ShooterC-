@@ -3,6 +3,7 @@
 #include "Vaisseau.h"
 #include "Constants.h"
 #include "Tir.h"
+#include "Ennemi.h"
 #include <vector>
 using std::vector;
 
@@ -23,6 +24,11 @@ private:
     Vaisseau vaisseau{ Constants::START_X, Constants::START_Y, 0 };
 
     vector<Tir*> tirs{};
+
+    float compteur;
+
+    vector<Ennemi> ennemis{};
+    void UpdateEnnemis(float dt);
 };
 
 

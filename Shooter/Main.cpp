@@ -22,7 +22,8 @@ Etat* etatCourant = &etatJeu;
 
 vector<string> nomsTextures{
 	"assets/vaisseau.png",
-	"assets/tir.png"
+	"assets/tir.png",
+	"assets/ennemi.png"
 };
 GestionTexture gestionTexture{ nomsTextures };
 

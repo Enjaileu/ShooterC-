@@ -26,5 +26,10 @@ public:
 	static const float ENNEMI_MAX_VX;
 	static const float ENNEMI_MAX_VY;
 
+	//BOSS
+	static const float BOSS_CHRONO;
+	static const float BOSS_START_X;
+	static const float BOSS_START_Y;
+	static const float BOSS_VITESSE;
 };
 

@@ -19,6 +19,7 @@
     <ClCompile Include="Tir.cpp" />
     <ClCompile Include="Ennemi.cpp" />
     <ClCompile Include="Joueur.cpp" />
+    <ClCompile Include="Boss.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Etat.h" />
@@ -33,5 +34,7 @@
     <ClInclude Include="Tir.h" />
     <ClInclude Include="Ennemi.h" />
     <ClInclude Include="Joueur.h" />
+    <ClInclude Include="EtatBoss.h" />
+    <ClInclude Include="Boss.h" />
   </ItemGroup>
 </Project>

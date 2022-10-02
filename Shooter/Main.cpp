@@ -4,7 +4,6 @@
 #include "EtatJeu.h"
 #include "EtatMenu.h"
 #include "EtatGameover.h"
-
 //declaration
 //------------------------------------------------------------------
 
@@ -23,7 +22,8 @@ Etat* etatCourant = &etatJeu;
 vector<string> nomsTextures{
 	"assets/vaisseau.png",
 	"assets/tir.png",
-	"assets/ennemi.png"
+	"assets/ennemi.png",
+	"assets/boss.png"
 };
 GestionTexture gestionTexture{ nomsTextures };
 

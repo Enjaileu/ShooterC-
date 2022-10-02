@@ -4,6 +4,8 @@
 #include "Constants.h"
 #include "Tir.h"
 #include "Ennemi.h"
+#include "Boss.h"
+
 #include <vector>
 using std::vector;
 
@@ -25,10 +27,14 @@ private:
 
     vector<Tir*> tirs{};
 
-    float compteur;
+    float compteur{ 0.f };
 
     vector<Ennemi> ennemis{};
     void UpdateEnnemis(float dt);
+
+    Boss boss{ Constants::BOSS_START_X, Constants::BOSS_START_Y };
+    float compteurBoss{ 0.f };
+    bool isBoss{ false };
 };
 
 

@@ -170,6 +170,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Constants.cpp" />
     <ClCompile Include="Ennemi.cpp" />
     <ClCompile Include="EtatGameover.cpp" />
@@ -188,9 +189,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Ennemi.h" />
     <ClInclude Include="Etat.h" />
+    <ClInclude Include="EtatBoss.h" />
     <ClInclude Include="EtatGameover.h" />
     <ClInclude Include="EtatJeu.h" />
     <ClInclude Include="EtatMenu.h" />

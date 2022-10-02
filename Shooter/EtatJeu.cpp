@@ -2,29 +2,31 @@
 #include <time.h> 
 
 void EtatJeu::Load() {
-	vaisseau.Load();
+	joueur.Load();
 	srand(time(nullptr));
 	compteur = 0.f;
 }
 void EtatJeu::Update(float dt) {
 	compteur += dt;
 	//mouv vaisseau
-	vaisseau.Update(dt);
+	joueur.Update(dt);
 
 	//gestion tir
+	if (IsKeyPressed(KEY_SPACE)) {
+		tirs.push_back(joueur.Tirer());
+	}
+
 	for (Tir* tir : tirs) {
 		tir->Update(dt);
 	}
+
 	for (int i = tirs.size() - 1; i >= 0; --i) {
 		if (tirs[i]->x > Constants::SCREEN_WIDTH) {
 			tirs[i]->Unload();
 			tirs.erase(begin(tirs) + i);
 		}
 	}
-	if (IsKeyPressed(KEY_SPACE)) {
-		tirs.push_back(vaisseau.Tirer());
-	}
-
+	
 	//gestion ennemi
 	if (compteur >= 2) {
 		Ennemi ennemi{ (float)Constants::SCREEN_WIDTH + 16, 0, 0 };
@@ -33,9 +35,11 @@ void EtatJeu::Update(float dt) {
 		compteur = 0;
 	}
 	UpdateEnnemis(dt);
+	
 }
 void EtatJeu::Draw() {
-	vaisseau.Draw();
+	joueur.Draw();
+	
 	for (Tir* tir : tirs) {
 		tir->Draw();
 	}
@@ -44,7 +48,7 @@ void EtatJeu::Draw() {
 	}
 }
 void EtatJeu::Unload() {
-	vaisseau.Unload();
+	joueur.Unload();
 }
 ProchainEtat EtatJeu::prochainEtat()
 {

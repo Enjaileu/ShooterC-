@@ -3,9 +3,7 @@
 #include <cmath>
 
 Ennemi::Ennemi(float xP, float yP, float rotationP) :
-	Sprite("assets/ennemi.png", xP, yP, rotationP, true),
-	vx{ 0.f },
-	vy{ 0.f }
+	Vaisseau("assets/ennemi.png", xP, yP, rotationP)
 {
 	PositionnerHauteur();
 }
@@ -17,12 +15,11 @@ void Ennemi::Update(float dt)
 	}
 	//vy += sin(rotation) * abs(Constants::ENNEMI_VITESSE_Y) * dt;
 
-	x += vx;
+	Vaisseau::Update(dt);
 }
 
 void Ennemi::PositionnerHauteur()
 {
 	float numRand = (float)rand() / (float)RAND_MAX;
-	//y = numRand * Constants::SCREEN_WIDTH + 16;
 	y = 16 * (1.f * numRand) + ((Constants::SCREEN_HEIGHT - 32) * numRand);
 }

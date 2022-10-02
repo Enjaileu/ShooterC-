@@ -1,20 +1,14 @@
 #pragma once
 #include "Sprite.h"
 #include "Tir.h"
+#include <string>
 
-class Vaisseau :
-    public Sprite
-{
+class Vaisseau : public Sprite {
 public:
-    Vaisseau(float xP, float yP, float rotationP);
-    void Update(float dt);
-    void Load();
-    Tir* Tirer();
-
-private:
-    float vx;
-    float vy;
-    float width;
-    float height;
+	Vaisseau(std::string cheminTextureP, float xP, float yP, float rotationP);
+	virtual void Update(float dt);
+	Tir* Tirer();
+	float vx{ 0.0f };
+	float vy{ 0.0f };
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "Etat.h"
-#include "Vaisseau.h"
+#include "Joueur.h"
 #include "Constants.h"
 #include "Tir.h"
 #include "Ennemi.h"
@@ -21,7 +21,7 @@ private:
     ProchainEtat prochainEtat() override;
     ProchainEtat transition{ ProchainEtat::None };
 
-    Vaisseau vaisseau{ Constants::START_X, Constants::START_Y, 0 };
+    Joueur joueur{ Constants::START_X, Constants::START_Y };
 
     vector<Tir*> tirs{};
 

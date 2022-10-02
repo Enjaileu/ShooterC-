@@ -176,6 +176,7 @@
     <ClCompile Include="EtatJeu.cpp" />
     <ClCompile Include="EtatMenu.cpp" />
     <ClCompile Include="GestionTextures.cpp" />
+    <ClCompile Include="Joueur.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Tir.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="EtatJeu.h" />
     <ClInclude Include="EtatMenu.h" />
     <ClInclude Include="GestionTextures.h" />
+    <ClInclude Include="Joueur.h" />
     <ClInclude Include="ProchainEtat.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Tir.h" />

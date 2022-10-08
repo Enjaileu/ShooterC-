@@ -13,28 +13,38 @@ void Boss::Update(float dt)
 	{
 	case EtatBoss::ChoixDeplacement:
 		UpdateChoixDeplacement();
-		//TraceLog(LOG_INFO, "Etat Choix Deplacement");
 		break;
 	case EtatBoss::Deplacement:
 		UpdateDeplacement(dt);
-		//TraceLog(LOG_INFO, "Etat Deplacement");
 		break;
 	case EtatBoss::AttenteTir:
 		UpdateAttenteTir(dt);
-		TraceLog(LOG_INFO, "Etat Attente");
 		break;
 	case EtatBoss::Tir:
-		//updateTir(dt);
+		UpdateTir(dt);
 		break;
 	case EtatBoss::SuperTir:
-		//updateSuperTir(dt);
+		UpdateSuperTir(dt);
 		break;
 	case EtatBoss::AttenteFin:
-		//updateAttenteFin(dt);
+		UpdateAttenteFin(dt);
 		break;
 	default:
-		//updateChoixDeplacement();
+		UpdateChoixDeplacement();
 		break;
+	}
+
+	//gestion tir
+	for (int i = tirs.size() - 1; i >=0; --i) {
+		tirs[i].Update(dt);
+		tirs[i].Draw();
+		if (tirs[i].x <= -16 
+			|| tirs[i].x >= Constants::SCREEN_WIDTH + 16
+			|| tirs[i].y <= -16
+			|| tirs[i].y >= Constants::SCREEN_HEIGHT + 16) {
+			tirs[i].Unload();
+			tirs.erase(begin(tirs) + i);
+		}
 	}
 }
 
@@ -43,7 +53,7 @@ void Boss::UpdateChoixDeplacement()
 	float numRand = (float)rand() / (float)RAND_MAX;
 	cibleX = numRand * (Constants::SCREEN_WIDTH - Constants::SCREEN_WIDTH / 3 - 96) + Constants::SCREEN_WIDTH / 3;
 	numRand = (float)rand() / (float)RAND_MAX;
-	cibleY = 48 * numRand + ((Constants::SCREEN_HEIGHT - 96) * numRand);
+	cibleY = numRand * (Constants::SCREEN_HEIGHT - 96 - 48) + 48;
 
 	etat = EtatBoss::Deplacement;
 }
@@ -82,12 +92,54 @@ void Boss::UpdateDeplacement(float dt)
 
 void Boss::UpdateAttenteTir(float dt)
 {
-	//TraceLog(LOG_INFO, " % f >= % f", chrono, Constants::BOSS_CHRONO);
 	if (chrono >= Constants::BOSS_CHRONO) {
 		chrono = 0;
-		etat = EtatBoss::ChoixDeplacement;
+		etat = EtatBoss::Tir;
 	}
 	else {
 		chrono += dt;
+	}
+}
+
+void Boss::UpdateTir(float dt)
+{
+	chrono += dt;
+	if(chrono >= Constants::BOSS_INTERVAL_TIR && nbTir < 3){
+		nbTir++;
+		TirEnnemi tir{ x - 52 ,y, 0, Constants::TIR_VITESSE};
+		tir.Load();
+		tirs.push_back(tir);
+		chrono = 0;
+	}
+	else if (chrono >= Constants::BOSS_CHRONO_TIR) {
+		etat = EtatBoss::SuperTir;
+		chrono = 0;
+		nbTir = 0;
+	}
+	
+}
+
+void Boss::UpdateSuperTir(float dt)
+{
+	if (nbTir == 0) {
+		nbTir++;
+		for (int i = 0; i < Constants::BOSS_NB_SUPERTIR; ++i) {
+			TirEnnemi tir(x - 52, y, 2.f * PI / Constants::BOSS_NB_SUPERTIR * i, Constants::BOSS_SUPERTIR_VITESSE);
+			tir.Load();
+			tirs.push_back(tir);
+		}
+	}
+	else {
+		nbTir = 0;
+		etat = EtatBoss::ChoixDeplacement;
+	}
+}
+
+void Boss::UpdateAttenteFin(float dt)
+{
+	chrono += dt;
+	if (chrono >= Constants::BOSS_ATTENTE_FIN) {
+		chrono = 0;
+		etat = EtatBoss::ChoixDeplacement;
 	}
 }

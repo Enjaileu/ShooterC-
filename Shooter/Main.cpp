@@ -23,7 +23,8 @@ vector<string> nomsTextures{
 	"assets/vaisseau.png",
 	"assets/tir.png",
 	"assets/ennemi.png",
-	"assets/boss.png"
+	"assets/boss.png",
+	"assets/tir_ennemi.png"
 };
 GestionTexture gestionTexture{ nomsTextures };
 

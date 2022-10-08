@@ -31,5 +31,11 @@ public:
 	static const float BOSS_START_X;
 	static const float BOSS_START_Y;
 	static const float BOSS_VITESSE;
+	static const float BOSS_CHRONO_TIR;
+	static const float BOSS_INTERVAL_TIR;
+	static const int BOSS_NB_SUPERTIR;
+	static const float BOSS_SUPERTIR_VITESSE;
+	static const float BOSS_ATTENTE_FIN;
+
 };
 

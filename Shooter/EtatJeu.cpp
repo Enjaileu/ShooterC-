@@ -1,5 +1,6 @@
 #include "EtatJeu.h"
 #include <time.h> 
+#include <string>
 
 void EtatJeu::Load() {
 	joueur.Load();
@@ -38,7 +39,7 @@ void EtatJeu::Update(float dt) {
 
 	if (!isBoss) {
 		if (compteur >= 2) {
-			Ennemi ennemi{ (float)Constants::SCREEN_WIDTH + 16, 0, 0 };
+			Ennemi ennemi{ (float)Constants::SCREEN_WIDTH + 16, 0, 0, 1 };
 			ennemi.Load();
 			ennemis.push_back(ennemi);
 			compteur = 0;
@@ -69,6 +70,10 @@ void EtatJeu::Draw() {
 	if (boss.visible) {
 		boss.Draw();
 	}
+
+	std::string text = "Vies du joueur = " + std::to_string(joueur.vies);
+	DrawText(text.c_str(), 10, 10, 16, WHITE);
+
 }
 void EtatJeu::Unload() {
 	joueur.Unload();
@@ -97,40 +102,49 @@ void EtatJeu::UpdateCollisions(float dt)
 	Rectangle rectBoss = boss.GetRectangle();
 	Rectangle rectJoueur = joueur.GetRectangle();
 
-	// boss-joueur
+	
 	if (boss.visible && joueur.visible) {
+		// boss-joueur
 		if (CheckCollisionRecs(rectBoss, rectJoueur)) {
-			joueur.visible = false;
+			if (joueur.Degats(1)){
+				joueur.visible = false;
+			}
+			
 		}
-	}
-	// boss-tirs du joueur
-	for (int i = tirs.size() - 1; i >= 0; i--) {
-		Rectangle rectTir = tirs[i]->GetRectangle();
-		if (CheckCollisionRecs(rectTir, rectBoss)) {
-			boss.visible = false;
-			tirs[i]->Unload();
-			tirs.erase(begin(tirs) + i);
-		}
-	}
 
-	//tirs du boss - joueur
-	if(boss.visible && joueur.visible){
+		// boss-tirs du joueur
+		for (int i = tirs.size() - 1; i >= 0; i--) {
+			Rectangle rectTir = tirs[i]->GetRectangle();
+			if (CheckCollisionRecs(rectTir, rectBoss)) {
+				tirs[i]->Unload();
+				tirs.erase(begin(tirs) + i);
+				if (boss.Degats(1)) {
+					boss.visible = false;
+				}
+			}
+		}
+
+		//tirs du boss - joueur
 		for (int i = boss.tirs.size() - 1; i >= 0; --i) {
 			Rectangle rectTir = boss.tirs[i].GetRectangle();
-			if(CheckCollisionRecs(rectJoueur, rectTir)){
-				joueur.visible = false;
+			if (CheckCollisionRecs(rectJoueur, rectTir)) {
 				boss.tirs[i].Unload();
 				boss.tirs.erase(begin(boss.tirs) + i);
+				if (joueur.Degats(1)) {
+					joueur.visible = false;
+				}
 
 			}
 		}
 	}
-
+	
 	// ennemis-joueur
 	for (int i = ennemis.size() - 1; i >= 0; --i) {
 		Rectangle rectEnnemi = ennemis[i].GetRectangle();
 		if (CheckCollisionRecs(rectEnnemi, rectJoueur)) {
-			joueur.visible = false;
+			if (joueur.Degats(1)) {
+				joueur.visible = false;
+			}
 			ennemis[i].Unload();
 			ennemis.erase(begin(ennemis) + i);
 		}
@@ -138,8 +152,10 @@ void EtatJeu::UpdateCollisions(float dt)
 		for (int j = tirs.size() - 1; j >= 0; --j) {
 			Rectangle rectTir = tirs[j]->GetRectangle();
 			if (CheckCollisionRecs(rectTir, rectEnnemi)) {
-				ennemis[i].Unload();
-				ennemis.erase(begin(ennemis) + i);
+				if(ennemis[i].Degats(1)){
+					ennemis[i].Unload();
+					ennemis.erase(begin(ennemis) + i);
+				}
 				tirs[j]->Unload();
 				tirs.erase(begin(tirs) + j);
 			}

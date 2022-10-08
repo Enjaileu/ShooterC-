@@ -1,8 +1,8 @@
 #include "Joueur.h"
 #include "Constants.h"
 
-Joueur::Joueur(float xP, float yP):
-	Vaisseau("assets/vaisseau.png", xP, yP, 0)
+Joueur::Joueur(float xP, float yP, int viesP):
+	Vaisseau("assets/vaisseau.png", xP, yP, 0, viesP)
 {
 }
 

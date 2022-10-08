@@ -10,7 +10,7 @@ class Boss :
     public Vaisseau
 {
 public:
-    Boss(float xP, float yP);
+    Boss(float xP, float yP, int viesP);
     void Update(float dt);
     vector<TirEnnemi> tirs{ };
 

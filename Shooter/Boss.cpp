@@ -1,8 +1,8 @@
 #include "Boss.h"
 #include "Constants.h"
 
-Boss::Boss(float xP, float yP):
-	Vaisseau("assets/boss.png", xP, yP, 0)
+Boss::Boss(float xP, float yP, int viesP):
+	Vaisseau("assets/boss.png", xP, yP, 0, viesP)
 {
 }
 

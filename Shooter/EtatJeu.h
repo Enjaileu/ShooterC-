@@ -23,7 +23,7 @@ private:
     ProchainEtat prochainEtat() override;
     ProchainEtat transition{ ProchainEtat::None };
 
-    Joueur joueur{ Constants::START_X, Constants::START_Y };
+    Joueur joueur{ Constants::START_X, Constants::START_Y, 3};
 
     vector<Tir*> tirs{};
 
@@ -32,7 +32,7 @@ private:
     vector<Ennemi> ennemis{};
     void UpdateEnnemis(float dt);
 
-    Boss boss{ Constants::BOSS_START_X, Constants::BOSS_START_Y };
+    Boss boss{ Constants::BOSS_START_X, Constants::BOSS_START_Y, 10};
     float compteurBoss{ 0.f };
     bool isBoss{ false };
 

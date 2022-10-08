@@ -35,6 +35,8 @@ private:
     Boss boss{ Constants::BOSS_START_X, Constants::BOSS_START_Y };
     float compteurBoss{ 0.f };
     bool isBoss{ false };
+
+    void UpdateCollisions(float dt);
 };
 
 

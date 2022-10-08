@@ -10,7 +10,9 @@ void EtatJeu::Update(float dt) {
 	compteur += dt;
 	compteurBoss += dt;
 	//mouv vaisseau
-	joueur.Update(dt);
+	if (joueur.visible) {
+		joueur.Update(dt);
+	}
 
 	//gestion tir
 	if (IsKeyPressed(KEY_SPACE)) {
@@ -43,14 +45,20 @@ void EtatJeu::Update(float dt) {
 		}
 	}
 	else {
-		boss.Update(dt);
+		if (boss.visible) {
+			boss.Update(dt);
+		}
 	}
 	UpdateEnnemis(dt);
+
+	UpdateCollisions(dt);
 
 	
 }
 void EtatJeu::Draw() {
-	joueur.Draw();
+	if(joueur.visible){
+		joueur.Draw();
+	}
 	
 	for (Tir* tir : tirs) {
 		tir->Draw();
@@ -58,16 +66,15 @@ void EtatJeu::Draw() {
 	for (Ennemi ennemi : ennemis) {
 		ennemi.Draw();
 	}
-	boss.Draw();
+	if (boss.visible) {
+		boss.Draw();
+	}
 }
 void EtatJeu::Unload() {
 	joueur.Unload();
 }
 ProchainEtat EtatJeu::prochainEtat()
 {
-	//ProchainEtat nouvelEtat = transition;
-	//transition = ProchainEtat::None;
-	//return nouvelEtat;
 	return ProchainEtat::None;
 }
 
@@ -80,17 +87,62 @@ void EtatJeu::UpdateEnnemis(float dt)
 			ennemis[j].Unload();
 			ennemis.erase(begin(ennemis) + j);
 		}
-		//test collision avec tir
-		/*
-		for (int i = 0; i < tirs.size(); ++i) {
-			Rectangle tirRec = tirs[i]->GetRectangle();
-			Rectangle ennemiRec = ennemis[j].GetRectangle();
-			if (CheckCollisionRecs(tirRec, ennemiRec)) {
-				ennemis[j].Unload();
-				ennemis.erase(begin(ennemis) + j);
-				TraceLog(LOG_INFO, "Ennemi touché!");
-			}
-		}*/
 
+	}
+}
+
+void EtatJeu::UpdateCollisions(float dt)
+{
+	
+	Rectangle rectBoss = boss.GetRectangle();
+	Rectangle rectJoueur = joueur.GetRectangle();
+
+	// boss-joueur
+	if (boss.visible && joueur.visible) {
+		if (CheckCollisionRecs(rectBoss, rectJoueur)) {
+			joueur.visible = false;
+		}
+	}
+	// boss-tirs du joueur
+	for (int i = tirs.size() - 1; i >= 0; i--) {
+		Rectangle rectTir = tirs[i]->GetRectangle();
+		if (CheckCollisionRecs(rectTir, rectBoss)) {
+			boss.visible = false;
+			tirs[i]->Unload();
+			tirs.erase(begin(tirs) + i);
+		}
+	}
+
+	//tirs du boss - joueur
+	if(boss.visible && joueur.visible){
+		for (int i = boss.tirs.size() - 1; i >= 0; --i) {
+			Rectangle rectTir = boss.tirs[i].GetRectangle();
+			if(CheckCollisionRecs(rectJoueur, rectTir)){
+				joueur.visible = false;
+				boss.tirs[i].Unload();
+				boss.tirs.erase(begin(boss.tirs) + i);
+
+			}
+		}
+	}
+
+	// ennemis-joueur
+	for (int i = ennemis.size() - 1; i >= 0; --i) {
+		Rectangle rectEnnemi = ennemis[i].GetRectangle();
+		if (CheckCollisionRecs(rectEnnemi, rectJoueur)) {
+			joueur.visible = false;
+			ennemis[i].Unload();
+			ennemis.erase(begin(ennemis) + i);
+		}
+		// ennemis-tirs du joueur
+		for (int j = tirs.size() - 1; j >= 0; --j) {
+			Rectangle rectTir = tirs[j]->GetRectangle();
+			if (CheckCollisionRecs(rectTir, rectEnnemi)) {
+				ennemis[i].Unload();
+				ennemis.erase(begin(ennemis) + i);
+				tirs[j]->Unload();
+				tirs.erase(begin(tirs) + j);
+			}
+		}
 	}
 }

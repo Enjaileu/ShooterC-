@@ -12,6 +12,7 @@ class Boss :
 public:
     Boss(float xP, float yP);
     void Update(float dt);
+    vector<TirEnnemi> tirs{ };
 
 private:
 
@@ -27,7 +28,6 @@ private:
     float cibleY{ 0.f };
     float chrono{ 0.f };
 
-    vector<TirEnnemi> tirs{ };
     int nbTir{ 0 };
 };
 

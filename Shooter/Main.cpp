@@ -17,14 +17,15 @@ void ChangerEtat(Etat* nouvelEtat);
 EtatMenu etatMenu{};
 EtatJeu etatJeu{};
 EtatGameover etatGameover{};
-Etat* etatCourant = &etatJeu;
+Etat* etatCourant = &etatMenu;
 
 vector<string> nomsTextures{
 	"assets/vaisseau.png",
 	"assets/tir.png",
 	"assets/ennemi.png",
 	"assets/boss.png",
-	"assets/tir_ennemi.png"
+	"assets/tir_ennemi.png",
+	"assets/titre.png"
 };
 GestionTexture gestionTexture{ nomsTextures };
 

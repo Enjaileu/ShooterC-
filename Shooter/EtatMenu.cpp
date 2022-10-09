@@ -3,6 +3,7 @@
 #include "Constants.h"
 
 void EtatMenu::Load() {
+    titre.Load();
 }
 void EtatMenu::Update(float dt) {
     if (IsKeyPressed(KEY_SPACE)) {
@@ -10,10 +11,10 @@ void EtatMenu::Update(float dt) {
     }
 }
 void EtatMenu::Draw() {
-    DrawText("SHOOTER", 40, 50, 240, WHITE);
-    DrawText("Press [SPACE] to play", 50, Constants::SCREEN_HEIGHT - 30, 20, WHITE);
+    titre.Draw();
 }
 void EtatMenu::Unload() {
+    titre.Unload();
 }
 
 ProchainEtat EtatMenu::prochainEtat()

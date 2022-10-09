@@ -19,6 +19,7 @@ public:
 
 	//TIR
 	static const float TIR_VITESSE;
+	static const float BOUCLIER_DISTANCE;
 
 	//ENNEMI
 	static const float ENNEMI_VITESSE_X;

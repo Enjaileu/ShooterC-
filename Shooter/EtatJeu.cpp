@@ -1,6 +1,7 @@
 #include "EtatJeu.h"
 #include <time.h> 
 #include <string>
+#include <cmath>
 
 void EtatJeu::Load() {
 	joueur.Load();
@@ -18,6 +19,9 @@ void EtatJeu::Update(float dt) {
 	//gestion tir
 	if (IsKeyPressed(KEY_SPACE)) {
 		tirs.push_back(joueur.Tirer());
+	}
+	else if (IsKeyPressed(KEY_B)) {
+		AttaqueBouclier();
 	}
 
 	for (Tir* tir : tirs) {
@@ -159,6 +163,21 @@ void EtatJeu::UpdateCollisions(float dt)
 				tirs[j]->Unload();
 				tirs.erase(begin(tirs) + j);
 			}
+		}
+	}
+}
+
+void EtatJeu::AttaqueBouclier() {
+	TraceLog(LOG_INFO, "attaque bouclier");
+	for (int i = boss.tirs.size() - 1; i >= 0; --i) {
+		float dx = abs(joueur.x - boss.tirs[i].x);
+		float dy = abs(joueur.y - boss.tirs[i].y);
+		TraceLog(LOG_INFO, "dx = %f  dy = %f  ==> distance : %f", dx, dy, dx * dx + dy * dy);
+
+		if (dx * dx + dy * dy <= Constants::BOUCLIER_DISTANCE* Constants::BOUCLIER_DISTANCE) {
+			TraceLog(LOG_INFO, "tir suppr");
+			boss.tirs[i].Unload();
+			boss.tirs.erase(begin(boss.tirs) + i);
 		}
 	}
 }

@@ -37,6 +37,8 @@ private:
     bool isBoss{ false };
 
     void UpdateCollisions(float dt);
+
+    void AttaqueBouclier();
 };
 
 

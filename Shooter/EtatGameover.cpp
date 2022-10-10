@@ -3,17 +3,20 @@
 #include "Constants.h"
 
 void EtatGameover::Load() {
+    titreGameover.Load();
 }
+
 void EtatGameover::Update(float dt) {
-    if (IsKeyPressed(KEY_SPACE)) {
+    if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_ENTER) ){
         transition = ProchainEtat::Menu;
     }
 }
 void EtatGameover::Draw() {
-    DrawText("Game Over", Constants::SCREEN_WIDTH / 2 - 50, Constants::SCREEN_HEIGHT / 2, 20, WHITE);
+    titreGameover.Draw();
     DrawText("Press [SPACE] to back to the menu.", Constants::SCREEN_WIDTH / 2 - 200, Constants::SCREEN_HEIGHT / 2 + 25, 20, WHITE);
 }
 void EtatGameover::Unload() {
+    titreGameover.Unload();
 }
 
 ProchainEtat EtatGameover::prochainEtat()

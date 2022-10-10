@@ -6,6 +6,19 @@ Boss::Boss(float xP, float yP, int viesP):
 {
 }
 
+void Boss::Load()
+{
+	Sprite::Load();
+	rotation = 0;
+	vies = 20;
+	etat = EtatBoss::ChoixDeplacement;
+	chrono = 0.0f;
+	cibleY = 0.0f;
+	cibleX = 0.f;
+	x = Constants::BOSS_START_X;
+	y = Constants::BOSS_START_Y;
+}
+
 void Boss::Update(float dt)
 {
 	Vaisseau::Update(dt);

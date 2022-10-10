@@ -15,6 +15,7 @@ const float Constants::ACCELERATION{ 250.f };
 const float Constants::DECELERATION{ 0.58f };
 const float Constants::MAX_VY{ 25.0f };
 const float Constants::MAX_VX{ 15.0f };
+const int Constants::VAISSEAU_VIES{ 5 };
 
 //TIR
 const float Constants::TIR_VITESSE{ 1000.f };
@@ -36,3 +37,6 @@ const float Constants::BOSS_INTERVAL_TIR{ 0.33f };
 const int Constants::BOSS_NB_SUPERTIR{ 16 };
 const float Constants::BOSS_SUPERTIR_VITESSE{ 400.f };
 const float Constants::BOSS_ATTENTE_FIN{ 2.f };
+
+//JEU
+const float Constants::DUREE_GAME_OVER{ 2.f };

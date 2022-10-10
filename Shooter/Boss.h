@@ -11,6 +11,7 @@ class Boss :
 {
 public:
     Boss(float xP, float yP, int viesP);
+    void Load() override;
     void Update(float dt);
     vector<TirEnnemi> tirs{ };
 

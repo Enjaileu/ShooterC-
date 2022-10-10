@@ -6,6 +6,16 @@ Joueur::Joueur(float xP, float yP, int viesP):
 {
 }
 
+void Joueur::Load() {
+	Sprite::Load();
+	vies = Constants::VAISSEAU_VIES;
+	visible = true;
+	x = Constants::START_X;
+	y = Constants::START_Y;
+	vx = 0;
+	vy = 0;
+}
+
 void Joueur::Update(float dt)
 {
 	//deplacement

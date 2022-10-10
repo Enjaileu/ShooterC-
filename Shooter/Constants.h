@@ -16,6 +16,7 @@ public:
 	static const float DECELERATION;
 	static const float MAX_VY;
 	static const float MAX_VX;
+	static const int VAISSEAU_VIES;
 
 	//TIR
 	static const float TIR_VITESSE;
@@ -37,6 +38,9 @@ public:
 	static const int BOSS_NB_SUPERTIR;
 	static const float BOSS_SUPERTIR_VITESSE;
 	static const float BOSS_ATTENTE_FIN;
+
+	//JEU
+	static const float DUREE_GAME_OVER;
 
 };
 

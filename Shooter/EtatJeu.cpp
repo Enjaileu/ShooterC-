@@ -7,6 +7,9 @@ void EtatJeu::Load() {
 	joueur.Load();
 	boss.Load();
 	srand(time(nullptr));
+	compteurGameover = 0.0f;
+	compteur = 0;
+	compteurBoss = 0;
 }
 void EtatJeu::Update(float dt) {
 	compteur += dt;
@@ -14,6 +17,9 @@ void EtatJeu::Update(float dt) {
 	//mouv vaisseau
 	if (joueur.visible) {
 		joueur.Update(dt);
+	}
+	else {
+		UpdateGameover(dt);
 	}
 
 	//gestion tir
@@ -58,8 +64,9 @@ void EtatJeu::Update(float dt) {
 
 	UpdateCollisions(dt);
 
-	
+	UpdateGameover(dt);	
 }
+
 void EtatJeu::Draw() {
 	if(joueur.visible){
 		joueur.Draw();
@@ -84,7 +91,9 @@ void EtatJeu::Unload() {
 }
 ProchainEtat EtatJeu::prochainEtat()
 {
-	return ProchainEtat::None;
+	ProchainEtat nouvelEtat = transition;
+	transition = ProchainEtat::None;
+	return nouvelEtat;
 }
 
 void EtatJeu::UpdateEnnemis(float dt)
@@ -178,6 +187,20 @@ void EtatJeu::AttaqueBouclier() {
 			TraceLog(LOG_INFO, "tir suppr");
 			boss.tirs[i].Unload();
 			boss.tirs.erase(begin(boss.tirs) + i);
+		}
+	}
+}
+
+void EtatJeu::UpdateGameover(float dt)
+{
+	if (joueur.vies <= 0) {
+		compteurGameover += dt;
+		if (compteurGameover >= Constants::DUREE_GAME_OVER) {
+			for (int i = ennemis.size() - 1; i >= 0; --i) {
+				ennemis[i].Unload();
+				ennemis.erase(begin(ennemis) + i);
+			}
+			transition = ProchainEtat::Gameover;
 		}
 	}
 }

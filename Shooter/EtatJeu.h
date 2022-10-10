@@ -39,6 +39,9 @@ private:
     void UpdateCollisions(float dt);
 
     void AttaqueBouclier();
+
+    float compteurGameover{ 0.0f };
+    void UpdateGameover(float dt);
 };
 
 

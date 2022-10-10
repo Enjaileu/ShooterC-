@@ -171,6 +171,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="Bouton.cpp" />
     <ClCompile Include="Constants.cpp" />
     <ClCompile Include="Ennemi.cpp" />
     <ClCompile Include="EtatGameover.cpp" />
@@ -191,6 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Boss.h" />
+    <ClInclude Include="Bouton.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Ennemi.h" />
     <ClInclude Include="Etat.h" />

@@ -21,6 +21,7 @@
     <ClCompile Include="Joueur.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="TirEnnemi.cpp" />
+    <ClCompile Include="Bouton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Etat.h" />
@@ -38,5 +39,6 @@
     <ClInclude Include="EtatBoss.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="TirEnnemi.h" />
+    <ClInclude Include="Bouton.h" />
   </ItemGroup>
 </Project>

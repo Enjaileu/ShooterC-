@@ -4,8 +4,8 @@ class Joueur :
     public Vaisseau
 {
 public:
-    Joueur(float xP, float yP, int viesP);
+    Joueur(float xP, float yP, CoteEcran entreeP, CoteEcran sortieP, int viesP);
     void Load() override;
-    void Update(float dt);
+    void UpdatePhasePrincipale(float dt) override;
 };
 

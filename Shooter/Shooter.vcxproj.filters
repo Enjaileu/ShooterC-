@@ -40,5 +40,7 @@
     <ClInclude Include="Boss.h" />
     <ClInclude Include="TirEnnemi.h" />
     <ClInclude Include="Bouton.h" />
+    <ClInclude Include="Phase.h" />
+    <ClInclude Include="CoteEcran.h" />
   </ItemGroup>
 </Project>

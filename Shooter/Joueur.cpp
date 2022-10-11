@@ -1,8 +1,8 @@
 #include "Joueur.h"
 #include "Constants.h"
 
-Joueur::Joueur(float xP, float yP, int viesP):
-	Vaisseau("assets/vaisseau.png", xP, yP, 0, viesP)
+Joueur::Joueur(float xP, float yP, CoteEcran entreeP, CoteEcran sortieP, int viesP):
+	Vaisseau("assets/vaisseau.png", 0, entreeP, sortieP, xP, yP, -1, viesP)
 {
 }
 
@@ -16,34 +16,27 @@ void Joueur::Load() {
 	vy = 0;
 }
 
-void Joueur::Update(float dt)
+void Joueur::UpdatePhasePrincipale(float dt)
 {
 	//deplacement
 	if (IsKeyDown(KEY_UP)) {
-		vy -= Constants::ACCELERATION * dt;
+		vy -= Constants::ACCELERATION;
 	}
 	else if (IsKeyDown(KEY_DOWN)) {
-		vy += Constants::ACCELERATION * dt;
+		vy += Constants::ACCELERATION;
 	}
 
 	if (IsKeyDown(KEY_LEFT)) {
-		vx -= Constants::ACCELERATION * dt;
+		vx -= Constants::ACCELERATION ;
 	}
 	else if (IsKeyDown(KEY_RIGHT)) {
-		vx += Constants::ACCELERATION * dt;
+		vx += Constants::ACCELERATION;
 	}
-
-	if (vx > Constants::MAX_VX) {
-		vx = Constants::MAX_VX;
-	}
-	if (vy > Constants::MAX_VY) {
-		vy = Constants::MAX_VY;
-	}
-
+	
 	vx *= Constants::DECELERATION;
 	vy *= Constants::DECELERATION;
 
-	Vaisseau::Update(dt);
+	Vaisseau::UpdatePhasePrincipale(dt);
 
 	//gerer la vitesse max
 	if (x <= 16) {

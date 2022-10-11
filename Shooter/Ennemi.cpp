@@ -2,19 +2,18 @@
 #include "Constants.h"
 #include <cmath>
 
-Ennemi::Ennemi(float xP, float yP, float rotationP, int viesP) :
-	Vaisseau("assets/ennemi.png", xP, yP, rotationP, viesP)
+Ennemi::Ennemi(float xP, float yP, float rotationP, CoteEcran entreeP, CoteEcran sortieP, float dureePhasePrincipaleP, int viesP) :
+	Vaisseau("assets/ennemi.png", rotationP, entreeP, sortieP, xP, yP, dureePhasePrincipaleP, viesP)
 {
 	PositionnerHauteur();
 }
 
-void Ennemi::Update(float dt)
+void Ennemi::UpdatePhasePrincipale(float dt)
 {
+	Vaisseau::UpdatePhasePrincipale(dt);
 	if (vx > Constants::ENNEMI_MAX_VX) {
-		vx -= cos(rotation) * abs(Constants::ENNEMI_VITESSE_X) * dt;
+		vx -= cos(rotation) * abs(Constants::ENNEMI_VITESSE_X);
 	}
-
-	Vaisseau::Update(dt);
 }
 
 void Ennemi::PositionnerHauteur()

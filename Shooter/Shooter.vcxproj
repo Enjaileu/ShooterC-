@@ -194,6 +194,7 @@
     <ClInclude Include="Boss.h" />
     <ClInclude Include="Bouton.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="CoteEcran.h" />
     <ClInclude Include="Ennemi.h" />
     <ClInclude Include="Etat.h" />
     <ClInclude Include="EtatBoss.h" />
@@ -202,6 +203,7 @@
     <ClInclude Include="EtatMenu.h" />
     <ClInclude Include="GestionTextures.h" />
     <ClInclude Include="Joueur.h" />
+    <ClInclude Include="Phase.h" />
     <ClInclude Include="ProchainEtat.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Tir.h" />

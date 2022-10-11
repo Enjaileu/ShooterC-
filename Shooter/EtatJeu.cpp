@@ -9,11 +9,10 @@ void EtatJeu::Load() {
 	srand(time(nullptr));
 	compteurGameover = 0.0f;
 	compteur = 0;
-	compteurBoss = 0;
 }
+
 void EtatJeu::Update(float dt) {
 	compteur += dt;
-	compteurBoss += dt;
 	//mouv vaisseau
 	if (joueur.visible) {
 		joueur.Update(dt);
@@ -42,28 +41,14 @@ void EtatJeu::Update(float dt) {
 	}
 	
 	//gestion ennemi - boss
-	if (compteurBoss >= 5.f) {
-		compteurBoss = 0;
-		isBoss = true;
-	}
 
-	if (!isBoss) {
-		if (compteur >= 2) {
-			Ennemi ennemi{ (float)Constants::SCREEN_WIDTH + 16, 0, 0, 1 };
-			ennemi.Load();
-			ennemis.push_back(ennemi);
-			compteur = 0;
-		}
-	}
-	else {
-		if (boss.visible) {
-			boss.Update(dt);
-		}
-	}
 	UpdateEnnemis(dt);
 
-	UpdateCollisions(dt);
+	if (boss.visible) {
+		boss.Update(dt);
+	}
 
+	UpdateCollisions(dt);
 	UpdateGameover(dt);	
 }
 
@@ -86,9 +71,11 @@ void EtatJeu::Draw() {
 	DrawText(text.c_str(), 10, 10, 16, WHITE);
 
 }
+
 void EtatJeu::Unload() {
 	joueur.Unload();
 }
+
 ProchainEtat EtatJeu::prochainEtat()
 {
 	ProchainEtat nouvelEtat = transition;
@@ -98,15 +85,32 @@ ProchainEtat EtatJeu::prochainEtat()
 
 void EtatJeu::UpdateEnnemis(float dt)
 {
-	for (int j = ennemis.size() - 1; j >= 0; --j) {
-		ennemis[j].Update(dt);
-		//ennemi trop loin
-		if (ennemis[j].x < -16) {
-			ennemis[j].Unload();
-			ennemis.erase(begin(ennemis) + j);
-		}
-
+	// Apparition
+	compteur += dt;
+	if (compteur >= Constants::ENNEMI_INTERVAL)
+	{
+		int limiteApparition = Constants::SCREEN_HEIGHT;
+		float yEnnemi = (float)(rand() % limiteApparition);
+		float xCible = 500.0f;
+		float dureePhasePrincipale = 1.0f;
+		Ennemi ennemi{ xCible, yEnnemi, PI, CoteEcran::Droite,
+		CoteEcran::Gauche, dureePhasePrincipale, 1 };
+		ennemi.Load();
+		ennemis.push_back(ennemi);
+		compteur -= Constants::ENNEMI_INTERVAL;
 	}
+
+	//update
+	for (int i = ennemis.size() - 1; i >= 0; --i) {
+		ennemis[i].Update(dt);
+		// Sortie de l'ecran
+		if (ennemis[i].HorsJeu()) {
+			ennemis[i].Unload();
+			ennemis.erase(begin(ennemis) + i);
+		}
+	}
+
+	
 }
 
 void EtatJeu::UpdateCollisions(float dt)

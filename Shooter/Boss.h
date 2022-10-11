@@ -10,10 +10,11 @@ class Boss :
     public Vaisseau
 {
 public:
-    Boss(float xP, float yP, int viesP);
+    Boss(float xP, float yP, CoteEcran entreeP, CoteEcran sortieP, int viesP);
     void Load() override;
-    void Update(float dt);
+    void UpdatePhasePrincipale(float dt) override;
     vector<TirEnnemi> tirs{ };
+    //vector<TirEnnemi>& tirsEtatJeu;
 
 private:
 

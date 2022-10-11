@@ -1,8 +1,9 @@
 #include "Boss.h"
 #include "Constants.h"
 
-Boss::Boss(float xP, float yP, int viesP):
-	Vaisseau("assets/boss.png", xP, yP, 0, viesP)
+Boss::Boss(float xP, float yP, CoteEcran entreeP, CoteEcran sortieP, int viesP):
+	Vaisseau("assets/boss.png", 0, entreeP, sortieP, xP, yP, -1, viesP)
+	//tirsEtatJeu{tirsEtatJeuP}
 {
 }
 
@@ -19,9 +20,9 @@ void Boss::Load()
 	y = Constants::BOSS_START_Y;
 }
 
-void Boss::Update(float dt)
+void Boss::UpdatePhasePrincipale(float dt)
 {
-	Vaisseau::Update(dt);
+	
 	switch (etat)
 	{
 	case EtatBoss::ChoixDeplacement:
@@ -59,6 +60,8 @@ void Boss::Update(float dt)
 			tirs.erase(begin(tirs) + i);
 		}
 	}
+
+	Vaisseau::UpdatePhasePrincipale(dt);
 }
 
 void Boss::UpdateChoixDeplacement()
@@ -77,27 +80,26 @@ void Boss::UpdateDeplacement(float dt)
 		vy = Constants::BOSS_VITESSE;
 	}
 	else if (y > cibleY) {
-		vy = -Constants::BOSS_VITESSE;
+		vy = -Constants::BOSS_VITESSE ;
 	}
 	 
 	if (x < cibleX) {
-		vx = Constants::BOSS_VITESSE;
+		vx = Constants::BOSS_VITESSE ;
 	}
 	else if (x > cibleX) {
-		vx = -Constants::BOSS_VITESSE;
+		vx = -Constants::BOSS_VITESSE ;
 	}
 	
 	chrono += dt;
 	
-	
-	if (abs(y - cibleY) < Constants::BOSS_VITESSE * 0.75f) {
+	if (abs(y - cibleY) < Constants::BOSS_VITESSE * 0.75f * dt) {
 		vy = 0;
 	}
 
-	if (abs(cibleX-x) < Constants::BOSS_VITESSE * 0.75f) {
+	if (abs(cibleX-x) < Constants::BOSS_VITESSE * 0.75f * dt) {
 		vx = 0;
 	}
-
+	
 	if (vy == 0 && vx == 0) {
 		etat = EtatBoss::AttenteTir;
 	}

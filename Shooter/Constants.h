@@ -10,13 +10,12 @@ public:
 	static const int VERTICAL_SEPARATION;
 
 	//VAISSEAU
-	static const int START_X;
-	static const int START_Y;
+	static const float START_X;
+	static const float START_Y;
 	static const float ACCELERATION;
 	static const float DECELERATION;
-	static const float MAX_VY;
-	static const float MAX_VX;
 	static const int VAISSEAU_VIES;
+	static const float VITESSE_PLACEMENT;
 
 	//TIR
 	static const float TIR_VITESSE;
@@ -27,6 +26,7 @@ public:
 	static const float ENNEMI_VITESSE_Y;
 	static const float ENNEMI_MAX_VX;
 	static const float ENNEMI_MAX_VY;
+	static const float ENNEMI_INTERVAL;
 
 	//BOSS
 	static const float BOSS_CHRONO;

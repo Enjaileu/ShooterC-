@@ -18,10 +18,12 @@ void Boss::Load()
 	cibleX = 0.f;
 	x = Constants::BOSS_START_X;
 	y = Constants::BOSS_START_Y;
+	visible = true;
 }
 
 void Boss::UpdatePhasePrincipale(float dt)
 {
+	TraceLog(LOG_INFO, "update principale");
 	
 	switch (etat)
 	{

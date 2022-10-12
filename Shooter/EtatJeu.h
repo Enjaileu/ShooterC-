@@ -6,6 +6,7 @@
 #include "Ennemi.h"
 #include "Boss.h"
 #include "Vague.h"
+#include "Parallaxe.h"
 
 #include <vector>
 using std::vector;
@@ -44,7 +45,12 @@ private:
     vector<Vague> vagues;
     int compteurVagues{ 0 };
 
-    Boss boss{ Constants::SCREEN_WIDTH - 200, Constants::SCREEN_HEIGHT / 2, CoteEcran::Haut, CoteEcran::Bas, 100 };
+    Boss boss{ Constants::SCREEN_WIDTH - 200, Constants::SCREEN_HEIGHT / 2.0, CoteEcran::Haut, CoteEcran::Bas, 100 };
+
+    vector<Parallaxe> parallaxes{
+        { "assets/ciel.png", 2, -25.0f, 800 }
+    };
+    void UpdateParallaxes(float dt);
 };
 
 

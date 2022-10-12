@@ -3,8 +3,8 @@ class Constants
 {
 public:
 	//SCREEN
-	static const int SCREEN_WIDTH;
-	static const int SCREEN_HEIGHT;
+	static const float SCREEN_WIDTH;
+	static const float SCREEN_HEIGHT;
 
 	//UI
 	static const int VERTICAL_SEPARATION;

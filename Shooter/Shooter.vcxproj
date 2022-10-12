@@ -180,6 +180,7 @@
     <ClCompile Include="GestionTextures.cpp" />
     <ClCompile Include="Joueur.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Parallaxe.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Tir.cpp" />
     <ClCompile Include="TirEnnemi.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="EtatMenu.h" />
     <ClInclude Include="GestionTextures.h" />
     <ClInclude Include="Joueur.h" />
+    <ClInclude Include="Parallaxe.h" />
     <ClInclude Include="Phase.h" />
     <ClInclude Include="ProchainEtat.h" />
     <ClInclude Include="Sprite.h" />

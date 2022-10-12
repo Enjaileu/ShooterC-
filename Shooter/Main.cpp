@@ -30,7 +30,8 @@ vector<string> nomsTextures{
 	"assets/jouer_passif.png",
 	"assets/quitter_select.png",
 	"assets/quitter_passif.png",
-	"assets/gameoverTitre.png"
+	"assets/gameoverTitre.png",
+	"assets/ciel.png"
 };
 GestionTexture gestionTexture{ nomsTextures };
 

@@ -5,7 +5,6 @@
 
 void EtatJeu::Load() {
 	joueur.Load();
-	//boss.Load();
 	srand(time(nullptr));
 	compteurGameover = 0.0f;
 	compteur = 0;
@@ -13,6 +12,9 @@ void EtatJeu::Load() {
 	for (int i = 0; i < Constants::NB_VAGUES; ++i) {
 		Vague vague{ i + 1 };
 		vagues.push_back(vague);
+	}
+	for (Parallaxe& parallaxe : parallaxes) {
+		parallaxe.Load();
 	}
 }
 
@@ -55,9 +57,14 @@ void EtatJeu::Update(float dt) {
 
 	UpdateCollisions(dt);
 	UpdateGameover(dt);	
+	UpdateParallaxes(dt);
 }
 
 void EtatJeu::Draw() {
+	for (Parallaxe& parallaxe : parallaxes) {
+		parallaxe.Draw();
+	}
+
 	if(joueur.visible){
 		joueur.Draw();
 	}
@@ -74,11 +81,14 @@ void EtatJeu::Draw() {
 
 	std::string text = "Vies du joueur = " + std::to_string(joueur.vies);
 	DrawText(text.c_str(), 10, 10, 16, WHITE);
-
 }
 
 void EtatJeu::Unload() {
 	joueur.Unload();
+
+	for (Parallaxe& parallaxe : parallaxes) {
+		parallaxe.Unload();
+	}
 }
 
 ProchainEtat EtatJeu::prochainEtat()
@@ -94,17 +104,6 @@ void EtatJeu::UpdateEnnemis(float dt)
 	//compteur += dt;
 	if (compteur >= Constants::ENNEMI_INTERVAL && compteurVagues < Constants::NB_VAGUES)
 	{
-		/*
-		int limiteApparition = Constants::SCREEN_HEIGHT;
-		float yEnnemi = (float)(rand() % limiteApparition);
-		float xCible = 500.0f;
-		float dureePhasePrincipale = 1.0f;
-		Ennemi ennemi{ xCible, yEnnemi, PI, CoteEcran::Droite,
-		CoteEcran::Gauche, dureePhasePrincipale, 1 };
-		ennemi.Load();
-		ennemis.push_back(ennemi);
-		*/
-		TraceLog(LOG_INFO, "Nouvelle vague");
 		vagues[compteurVagues].ParametrerVague(ennemis, boss);
 		++compteurVagues;
 		compteur -= Constants::ENNEMI_INTERVAL;
@@ -216,5 +215,11 @@ void EtatJeu::UpdateGameover(float dt)
 			}
 			transition = ProchainEtat::Gameover;
 		}
+	}
+}
+
+void EtatJeu::UpdateParallaxes(float dt) {
+	for (Parallaxe& parallaxe : parallaxes) {
+		parallaxe.Update(dt);
 	}
 }

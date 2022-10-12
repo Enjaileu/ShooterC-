@@ -2,8 +2,8 @@
 #include <cmath>
 
 //SCREEN
-const int Constants::SCREEN_WIDTH{ 800 };
-const int Constants::SCREEN_HEIGHT{ 600 };
+const float Constants::SCREEN_WIDTH{ 800.f };
+const float Constants::SCREEN_HEIGHT{ 600.f };
 
 //UI
 const int Constants::VERTICAL_SEPARATION{ 25 };

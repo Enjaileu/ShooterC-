@@ -183,7 +183,6 @@
     <ClCompile Include="Parallaxe.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Tir.cpp" />
-    <ClCompile Include="TirEnnemi.cpp" />
     <ClCompile Include="Vague.cpp" />
     <ClCompile Include="Vaisseau.cpp" />
   </ItemGroup>
@@ -210,7 +209,6 @@
     <ClInclude Include="ProchainEtat.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Tir.h" />
-    <ClInclude Include="TirEnnemi.h" />
     <ClInclude Include="Vague.h" />
     <ClInclude Include="Vaisseau.h" />
   </ItemGroup>

@@ -39,6 +39,9 @@ void EtatJeu::Update(float dt) {
 	for (Tir* tir : tirs) {
 		tir->Update(dt);
 	}
+	for (Tir* tir : tirsBoss) {
+		tir->Update(dt);
+	}
 
 	for (int i = tirs.size() - 1; i >= 0; --i) {
 		if (tirs[i]->x > Constants::SCREEN_WIDTH) {
@@ -46,23 +49,41 @@ void EtatJeu::Update(float dt) {
 			tirs.erase(begin(tirs) + i);
 		}
 	}
-	
-	//gestion ennemi - boss
 
+	// gestion ennemi - boss
 	UpdateEnnemis(dt);
 
 	if (boss.etat != EtatBoss::Inactif) {
 		boss.Update(dt);
+		if (boss.etat == EtatBoss::Tir) {
+			compteurBossTir += dt;
+			if (compteurBossTir >= Constants::BOSS_INTERVAL_TIR) {
+				TraceLog(LOG_INFO, "Boss tir");
+				tirsBoss.push_back(boss.Tirer(0));
+				compteurBossTir = 0;
+			}
+
+		}
+		else if (boss.etat == EtatBoss::SuperTir) {
+			for (int i = 0; i < Constants::BOSS_NB_SUPERTIR; ++i) {
+				tirsBoss.push_back(boss.Tirer(2.f * PI / Constants::BOSS_NB_SUPERTIR * i));
+			}
+			boss.etat = EtatBoss::AttenteFin;
+		}
 	}
 
 	UpdateCollisions(dt);
-	UpdateGameover(dt);	
+	UpdateGameover(dt);
 	UpdateParallaxes(dt);
 }
 
 void EtatJeu::Draw() {
 	for (Parallaxe& parallaxe : parallaxes) {
 		parallaxe.Draw();
+	}
+
+	if (boss.etat != EtatBoss::Inactif) {
+		boss.Draw();
 	}
 
 	if(joueur.visible){
@@ -72,11 +93,12 @@ void EtatJeu::Draw() {
 	for (Tir* tir : tirs) {
 		tir->Draw();
 	}
+	for (Tir* tir : tirsBoss) {
+		tir->Draw();
+	}
+
 	for (Ennemi ennemi : ennemis) {
 		ennemi.Draw();
-	}
-	if (boss.etat != EtatBoss::Inactif) {
-		boss.Draw();
 	}
 
 	std::string text = "Vies du joueur = " + std::to_string(joueur.vies);
@@ -144,18 +166,20 @@ void EtatJeu::UpdateCollisions(float dt)
 			if (CheckCollisionRecs(rectTir, rectBoss)) {
 				tirs[i]->Unload();
 				tirs.erase(begin(tirs) + i);
+				TraceLog(LOG_INFO, "%i", boss.vies);
 				if (boss.Degats(1)) {
 					boss.visible = false;
+					boss.etat = EtatBoss::Inactif;
 				}
 			}
 		}
 
 		//tirs du boss - joueur
-		for (int i = boss.tirs.size() - 1; i >= 0; --i) {
-			Rectangle rectTir = boss.tirs[i].GetRectangle();
+		for (int i = tirsBoss.size() - 1; i >= 0; --i) {
+			Rectangle rectTir = tirsBoss[i]->GetRectangle();
 			if (CheckCollisionRecs(rectJoueur, rectTir)) {
-				boss.tirs[i].Unload();
-				boss.tirs.erase(begin(boss.tirs) + i);
+				tirsBoss[i]->Unload();
+				tirsBoss.erase(begin(tirsBoss) + i);
 				if (joueur.Degats(1)) {
 					joueur.visible = false;
 				}
@@ -191,15 +215,15 @@ void EtatJeu::UpdateCollisions(float dt)
 
 void EtatJeu::AttaqueBouclier() {
 	TraceLog(LOG_INFO, "attaque bouclier");
-	for (int i = boss.tirs.size() - 1; i >= 0; --i) {
-		float dx = abs(joueur.x - boss.tirs[i].x);
-		float dy = abs(joueur.y - boss.tirs[i].y);
+	for (int i = tirsBoss.size() - 1; i >= 0; --i) {
+		float dx = abs(joueur.x - tirsBoss[i]->x);
+		float dy = abs(joueur.y - tirsBoss[i]->y);
 		TraceLog(LOG_INFO, "dx = %f  dy = %f  ==> distance : %f", dx, dy, dx * dx + dy * dy);
 
 		if (dx * dx + dy * dy <= Constants::BOUCLIER_DISTANCE* Constants::BOUCLIER_DISTANCE) {
 			TraceLog(LOG_INFO, "tir suppr");
-			boss.tirs[i].Unload();
-			boss.tirs.erase(begin(boss.tirs) + i);
+			tirsBoss[i]->Unload();
+			tirsBoss.erase(begin(tirsBoss) + i);
 		}
 	}
 }

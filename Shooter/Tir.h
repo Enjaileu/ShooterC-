@@ -4,8 +4,10 @@ class Tir :
     public Sprite
 {
 public:
-    Tir(float xP, float yP);
+    Tir(float xP, float yP, float rotationP, float vitesseP);
     void Update(float dt);
+private:
+    float vitesse;
 
 };
 

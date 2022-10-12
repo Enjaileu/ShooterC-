@@ -1,7 +1,6 @@
 #pragma once
 #include "Vaisseau.h"
 #include "EtatBoss.h"
-#include "TirEnnemi.h"
 #include <vector>
 
 using std::vector;
@@ -13,9 +12,9 @@ public:
     Boss(float xP, float yP, CoteEcran entreeP, CoteEcran sortieP, int viesP);
     void Load() override;
     void UpdatePhasePrincipale(float dt) override;
-    vector<TirEnnemi> tirs{ };
     void Parametrer(float xCibleP, float yCibleP, CoteEcran entree, CoteEcran sortie);
     EtatBoss etat = EtatBoss::Inactif;
+    Tir* Tirer(float rotationP);
 
 private:
 

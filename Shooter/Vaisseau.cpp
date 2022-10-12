@@ -31,7 +31,7 @@ void Vaisseau::Update(float dt) {
 }
 Tir* Vaisseau::Tirer() {
 	Rectangle rect = GetRectangle();
-	Tir* tir = new Tir(rect.x + rect.width, y);
+	Tir* tir = new Tir(rect.x + rect.width, y, 0, Constants::TIR_VITESSE);
 	tir->Load();
 	return tir;
 }

@@ -28,6 +28,7 @@ private:
     Joueur joueur{ Constants::START_X, Constants::START_Y, CoteEcran::Gauche, CoteEcran::Droite, 5};
 
     vector<Tir*> tirs{};
+    vector<Tir*> tirsBoss{};
 
     float compteur{ 0.f };
 
@@ -46,6 +47,7 @@ private:
     int compteurVagues{ 0 };
 
     Boss boss{ Constants::SCREEN_WIDTH - 200, Constants::SCREEN_HEIGHT / 2.0, CoteEcran::Haut, CoteEcran::Bas, 100 };
+    float compteurBossTir{ 0.f };
 
     vector<Parallaxe> parallaxes{
         { "assets/ciel.png", 2, -25.0f, 800 }

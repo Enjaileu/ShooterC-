@@ -31,10 +31,11 @@ const float Constants::ENNEMI_INTERVAL{ 2.f };
 const float Constants::BOSS_CHRONO{ 2.f };
 const float Constants::BOSS_START_X{ SCREEN_WIDTH + 100 };
 const float Constants::BOSS_START_Y{ SCREEN_HEIGHT / 2 };
-const float Constants::BOSS_VITESSE{ 250.f };
-const float Constants::BOSS_CHRONO_TIR{ 3.0f };
+const float Constants::BOSS_VITESSE{ 500.f };
+const float Constants::BOSS_CHRONO_TIR{ 2.0f };
 const float Constants::BOSS_INTERVAL_TIR{ 0.33f };
 const int Constants::BOSS_NB_SUPERTIR{ 16 };
+const int Constants::BOSS_NB_TIR{ 5 };
 const float Constants::BOSS_SUPERTIR_VITESSE{ 400.f };
 const float Constants::BOSS_ATTENTE_FIN{ 2.f };
 

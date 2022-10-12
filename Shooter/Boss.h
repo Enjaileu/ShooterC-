@@ -14,7 +14,8 @@ public:
     void Load() override;
     void UpdatePhasePrincipale(float dt) override;
     vector<TirEnnemi> tirs{ };
-    //vector<TirEnnemi>& tirsEtatJeu;
+    void Parametrer(float xCibleP, float yCibleP, CoteEcran entree, CoteEcran sortie);
+    EtatBoss etat = EtatBoss::Inactif;
 
 private:
 
@@ -25,7 +26,6 @@ private:
     void UpdateSuperTir(float dt);
     void UpdateAttenteFin(float dt);
 
-    EtatBoss etat = EtatBoss::ChoixDeplacement;
     float cibleX{ 0.f };
     float cibleY{ 0.f };
     float chrono{ 0.f };

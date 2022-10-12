@@ -41,6 +41,7 @@ public:
 
 	//JEU
 	static const float DUREE_GAME_OVER;
+	static const int NB_VAGUES;
 
 };
 

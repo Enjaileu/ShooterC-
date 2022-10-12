@@ -1,6 +1,7 @@
 #pragma once
 
 enum class EtatBoss {
+	Inactif,
 	ChoixDeplacement,
 	Deplacement,
 	AttenteTir,

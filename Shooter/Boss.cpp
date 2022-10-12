@@ -23,7 +23,6 @@ void Boss::Load()
 
 void Boss::UpdatePhasePrincipale(float dt)
 {
-	TraceLog(LOG_INFO, "update principale");
 	
 	switch (etat)
 	{
@@ -64,6 +63,18 @@ void Boss::UpdatePhasePrincipale(float dt)
 	}
 
 	Vaisseau::UpdatePhasePrincipale(dt);
+}
+
+void Boss::Parametrer(float xCibleP, float yCibleP, CoteEcran entree, CoteEcran sortie)
+{
+	Load();
+	etat = EtatBoss::ChoixDeplacement;
+	xCible = xCibleP;
+	yCibleP = yCibleP;
+	coteEcranEntree = entree;
+	coteEcranSortie = sortie;
+	visible = true;
+	ChangerPhase(Phase::Entree);
 }
 
 void Boss::UpdateChoixDeplacement()

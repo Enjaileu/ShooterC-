@@ -5,6 +5,7 @@
 #include "Tir.h"
 #include "Ennemi.h"
 #include "Boss.h"
+#include "Vague.h"
 
 #include <vector>
 using std::vector;
@@ -39,6 +40,9 @@ private:
 
     float compteurGameover{ 0.0f };
     void UpdateGameover(float dt);
+
+    vector<Vague> vagues;
+    int compteurVagues{ 0 };
 
     Boss boss{ Constants::SCREEN_WIDTH - 200, Constants::SCREEN_HEIGHT / 2, CoteEcran::Haut, CoteEcran::Bas, 100 };
 };

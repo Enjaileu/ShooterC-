@@ -22,6 +22,7 @@
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="TirEnnemi.cpp" />
     <ClCompile Include="Bouton.cpp" />
+    <ClCompile Include="Vague.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Etat.h" />
@@ -42,5 +43,6 @@
     <ClInclude Include="Bouton.h" />
     <ClInclude Include="Phase.h" />
     <ClInclude Include="CoteEcran.h" />
+    <ClInclude Include="Vague.h" />
   </ItemGroup>
 </Project>

@@ -40,3 +40,4 @@ const float Constants::BOSS_ATTENTE_FIN{ 2.f };
 
 //JEU
 const float Constants::DUREE_GAME_OVER{ 2.f };
+const int Constants::NB_VAGUES{ 3 };

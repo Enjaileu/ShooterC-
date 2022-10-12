@@ -5,10 +5,15 @@
 
 void EtatJeu::Load() {
 	joueur.Load();
-	boss.Load();
+	//boss.Load();
 	srand(time(nullptr));
 	compteurGameover = 0.0f;
 	compteur = 0;
+	compteurVagues = 0;
+	for (int i = 0; i < Constants::NB_VAGUES; ++i) {
+		Vague vague{ i + 1 };
+		vagues.push_back(vague);
+	}
 }
 
 void EtatJeu::Update(float dt) {
@@ -44,7 +49,7 @@ void EtatJeu::Update(float dt) {
 
 	UpdateEnnemis(dt);
 
-	if (boss.visible) {
+	if (boss.etat != EtatBoss::Inactif) {
 		boss.Update(dt);
 	}
 
@@ -63,7 +68,7 @@ void EtatJeu::Draw() {
 	for (Ennemi ennemi : ennemis) {
 		ennemi.Draw();
 	}
-	if (boss.visible) {
+	if (boss.etat != EtatBoss::Inactif) {
 		boss.Draw();
 	}
 
@@ -86,9 +91,10 @@ ProchainEtat EtatJeu::prochainEtat()
 void EtatJeu::UpdateEnnemis(float dt)
 {
 	// Apparition
-	compteur += dt;
-	if (compteur >= Constants::ENNEMI_INTERVAL)
+	//compteur += dt;
+	if (compteur >= Constants::ENNEMI_INTERVAL && compteurVagues < Constants::NB_VAGUES)
 	{
+		/*
 		int limiteApparition = Constants::SCREEN_HEIGHT;
 		float yEnnemi = (float)(rand() % limiteApparition);
 		float xCible = 500.0f;
@@ -97,6 +103,10 @@ void EtatJeu::UpdateEnnemis(float dt)
 		CoteEcran::Gauche, dureePhasePrincipale, 1 };
 		ennemi.Load();
 		ennemis.push_back(ennemi);
+		*/
+		TraceLog(LOG_INFO, "Nouvelle vague");
+		vagues[compteurVagues].ParametrerVague(ennemis, boss);
+		++compteurVagues;
 		compteur -= Constants::ENNEMI_INTERVAL;
 	}
 
@@ -120,7 +130,7 @@ void EtatJeu::UpdateCollisions(float dt)
 	Rectangle rectJoueur = joueur.GetRectangle();
 
 	
-	if (boss.visible && joueur.visible) {
+	if (boss.etat != EtatBoss::Inactif && joueur.visible) {
 		// boss-joueur
 		if (CheckCollisionRecs(rectBoss, rectJoueur)) {
 			if (joueur.Degats(1)){

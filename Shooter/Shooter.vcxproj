@@ -181,7 +181,9 @@
     <ClCompile Include="Joueur.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Parallaxe.cpp" />
+    <ClCompile Include="Particule.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SystemeParticule.cpp" />
     <ClCompile Include="Tir.cpp" />
     <ClCompile Include="Vague.cpp" />
     <ClCompile Include="Vaisseau.cpp" />
@@ -205,9 +207,11 @@
     <ClInclude Include="GestionTextures.h" />
     <ClInclude Include="Joueur.h" />
     <ClInclude Include="Parallaxe.h" />
+    <ClInclude Include="Particule.h" />
     <ClInclude Include="Phase.h" />
     <ClInclude Include="ProchainEtat.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SystemeParticules.h" />
     <ClInclude Include="Tir.h" />
     <ClInclude Include="Vague.h" />
     <ClInclude Include="Vaisseau.h" />

@@ -75,6 +75,7 @@ void EtatJeu::Update(float dt) {
 	UpdateCollisions(dt);
 	UpdateGameover(dt);
 	UpdateParallaxes(dt);
+	UpdateParticules();
 }
 
 void EtatJeu::Draw() {
@@ -101,6 +102,10 @@ void EtatJeu::Draw() {
 		ennemi.Draw();
 	}
 
+	for (SystemeParticules& systeme : particules) {
+		systeme.Draw();
+	}
+
 	std::string text = "Vies du joueur = " + std::to_string(joueur.vies);
 	DrawText(text.c_str(), 10, 10, 16, WHITE);
 }
@@ -111,6 +116,8 @@ void EtatJeu::Unload() {
 	for (Parallaxe& parallaxe : parallaxes) {
 		parallaxe.Unload();
 	}
+
+	particules.clear();
 }
 
 ProchainEtat EtatJeu::prochainEtat()
@@ -164,6 +171,7 @@ void EtatJeu::UpdateCollisions(float dt)
 		for (int i = tirs.size() - 1; i >= 0; i--) {
 			Rectangle rectTir = tirs[i]->GetRectangle();
 			if (CheckCollisionRecs(rectTir, rectBoss)) {
+				particules.emplace_back(tirs[i]->x, tirs[i]->y, ORANGE);
 				tirs[i]->Unload();
 				tirs.erase(begin(tirs) + i);
 				TraceLog(LOG_INFO, "%i", boss.vies);
@@ -178,6 +186,7 @@ void EtatJeu::UpdateCollisions(float dt)
 		for (int i = tirsBoss.size() - 1; i >= 0; --i) {
 			Rectangle rectTir = tirsBoss[i]->GetRectangle();
 			if (CheckCollisionRecs(rectJoueur, rectTir)) {
+				particules.emplace_back(tirsBoss[i]->x, tirsBoss[i]->y, ORANGE);
 				tirsBoss[i]->Unload();
 				tirsBoss.erase(begin(tirsBoss) + i);
 				if (joueur.Degats(1)) {
@@ -202,6 +211,7 @@ void EtatJeu::UpdateCollisions(float dt)
 		for (int j = tirs.size() - 1; j >= 0; --j) {
 			Rectangle rectTir = tirs[j]->GetRectangle();
 			if (CheckCollisionRecs(rectTir, rectEnnemi)) {
+				particules.emplace_back(tirs[j]->x, tirs[j]->y, ORANGE);
 				if(ennemis[i].Degats(1)){
 					ennemis[i].Unload();
 					ennemis.erase(begin(ennemis) + i);
@@ -245,5 +255,18 @@ void EtatJeu::UpdateGameover(float dt)
 void EtatJeu::UpdateParallaxes(float dt) {
 	for (Parallaxe& parallaxe : parallaxes) {
 		parallaxe.Update(dt);
+	}
+}
+
+void EtatJeu::UpdateParticules() {
+	// Mise à jour
+	for (SystemeParticules& systeme : particules) {
+		systeme.Update();
+	}
+	// Suppression
+	for (int i = particules.size() - 1; i >= 0; --i) {
+		if (!particules[i].actif) {
+			particules.erase(begin(particules) + i);
+		}
 	}
 }

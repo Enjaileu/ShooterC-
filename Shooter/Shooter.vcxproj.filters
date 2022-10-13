@@ -23,6 +23,8 @@
     <ClCompile Include="Bouton.cpp" />
     <ClCompile Include="Vague.cpp" />
     <ClCompile Include="Parallaxe.cpp" />
+    <ClCompile Include="Particule.cpp" />
+    <ClCompile Include="SystemeParticule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Etat.h" />
@@ -44,5 +46,7 @@
     <ClInclude Include="CoteEcran.h" />
     <ClInclude Include="Vague.h" />
     <ClInclude Include="Parallaxe.h" />
+    <ClInclude Include="Particule.h" />
+    <ClInclude Include="SystemeParticules.h" />
   </ItemGroup>
 </Project>

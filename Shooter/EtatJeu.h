@@ -7,6 +7,7 @@
 #include "Boss.h"
 #include "Vague.h"
 #include "Parallaxe.h"
+#include "SystemeParticules.h"
 
 #include <vector>
 using std::vector;
@@ -53,6 +54,9 @@ private:
         { "assets/ciel.png", 2, -25.0f, 800 }
     };
     void UpdateParallaxes(float dt);
+
+    void UpdateParticules();
+    vector<SystemeParticules> particules;
 };
 
 
